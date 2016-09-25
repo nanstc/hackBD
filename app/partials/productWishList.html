@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-12"><h4 style="text-align: left;">Products Wish List</h4></div>
+</div>
+<div class="row" ng-repeat="prod in WishList">
+    <div class="col-lg-4 col-sm-4" style="padding: 10px">
+      <img src="{{prod.image}}" class="img-responsive" />
+    </div>
+    <div class="col-lg-8 col-sm-8">
+      <table class="table table-striped">
+        <tr>
+          <td>Brand</td>
+          <td>{{prod.brand.name}}</td>
+        </tr>  
+        <tr>
+          <td>Category</td>
+          <td>{{prod.category.categoryName}}</td>
+        </tr>  
+        <tr>
+          <td>skuNumber</td>
+          <td>{{prod.skuNumber}}</td>
+        </tr>  
+        <tr>
+          <td>Title</td>
+          <td>{{prod.title}}</td>
+        </tr>  
+        <tr>
+          <td>Price</td>
+          <td>{{prod.price}} {{prod.priceUnit}} </td>
+        </tr>  
+        <tr>
+          <td>Rating</td>
+          <td>{{prod.overallRating}}</td>
+        </tr>  
+      </table>
+    </div>
+</div>

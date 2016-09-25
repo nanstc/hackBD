@@ -1,0 +1,43 @@
+<section class="cd-intro">
+    <h1>Product Comparison</h1>
+    <p><b> *Select an attribute from the left to sort products.</b></p>
+</section> <!-- .cd-intro -->
+
+<div class="cd-products-comparison-table">
+    <div class="cd-products-table">
+        <div class="top-info">
+            <div class="top-info-product-name" ><h3>Products</h3></div>
+            <div class="top-info-product" ng-repeat="item in ProductsToCompare|orderBy: sortKey">
+                <a ng-click="RemoveFromCompare($index)">
+                    <img class="img-responsive" src="{{item.image}}" alt="product image" title="Click to remove">
+                </a>
+                <p>{{item.title}}</p>
+            </div>
+        </div>
+        <div class="features">
+            <ul class="cd-features-list">
+                <li ng-class="{'attribute-selected' : sortAttr == attr[0], attribute : sortAttr != attr[0]}" ng-repeat="attr in ProductAttributesToCompare" ng-click="UpdateTable(attr[0])" >
+                    <p ng-click="alert(attr[0])">{{attr[1]}}</p>
+                </li> <!-- .product -->
+            </ul>
+        </div> <!-- .features -->
+
+        <div class="cd-products-wrapper">
+            <ul class="cd-products-columns">                            
+                <li class="product" ng-repeat="item in ProductsToCompare|orderBy: sortKey" style="background-color: #FFFFFF">
+                    <ul class="cd-features-list">
+                        <li class="attribute" ng-repeat="attr in ProductAttributesToCompare">
+                            <div ng-if="attr[0] == 'price' || attr[0] == 'regularPrice'">${{item[attr[0]]}}</div>
+                            <div ng-if="attr[0] == 'brand'">{{item[attr[0]].name}}</div>
+                            <div ng-if="attr[0] == 'deals' && item[attr[0]].length == 0 ">N/A</div>
+                            <div ng-if="attr[0] == 'deals' && item[attr[0]].length > 0 ">{{item[attr[0]][0].name}}</div>
+                            <div ng-if="attr[0] == 'category'">{{item[attr[0]].categoryName}}</div>
+                            <div ng-if="attr[0] == 'color'">{{item[attr[0]].value}}</div>
+                            <div ng-if="attr[0] != 'brand' && attr[0] != 'category' && attr[0] != 'price' && attr[0] != 'regularPrice' && attr[0] != 'deals'">{{item[attr[0]]}}</div>
+                        </li> <!-- .product -->
+                    </ul>
+                </li> <!-- .product -->
+            </ul>
+        </div>
+    </div>
+</div>

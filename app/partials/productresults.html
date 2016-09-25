@@ -1,0 +1,90 @@
+    <div style="background-color: #2f343e;">
+        <div class="navbar topnavbar navbar-static-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <a class="navbar-brand" href="#/home">      
+                        
+                        </a>
+                    </div>
+                    <ul class="nav navbar-nav" style="float: right; line-height:50px;">
+                        <li>
+                            <button class="btn btn-primary" type="button" ng-click="ShowWishList()">
+                              Wish List <span class="badge">{{WishList.length}}</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div>
+        <A ng-href="https://www.builddirect.com/">
+            <img id="imageLogo" src="images/buildDirectLogo.png" >
+        </A>
+        <div type="button" class="bar">    
+           <input id="search" type="text" ng-model="searchQuery" placeholder="Search for Items to Compare..." ng-keydown="($event.which === 13)?Search():0" style="width: 50%"/>
+            <button class="btnSearch" ng-click="Search()">GO</button>
+        </div>
+        
+    </div>
+    
+    <div class="container">
+        <div  ng-repeat="(categoryName, productByCat) in ProductsByCategory">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12">
+                    <h1 class="categoryHeader">{{categoryName}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb", ng-repeat="prod in productByCat|orderBy: prod.title">
+                    <div class="pin">
+                         <a class="thumbnail" href="{{prod.url}}">
+                            <img class="img-responsive" src="{{prod.image}}" alt="")>
+                        </a>
+                        <p>{{prod.title}} - {{prod.skuNumber}}</p>
+                        <div class="btn-toolbar" style="width: 100%;"> 
+                            <div class="btn-group"> 
+                                <button aria-label="Center Align" class="btn btn-default" type="button" title="Show Details" ng-click="ShowProductDetails(prod)">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-info-sign" ></span>
+                                </button>
+                                <button aria-label="Left Align" class="btn btn-default" type="button" title="Show Analytics" ng-click="ShowAnalytics(prod)" >
+                                    <span aria-hidden="true" class="glyphicon glyphicon-signal"></span>
+                                </button>
+                                <button aria-label="Justify" class="btn btn-default" type="button" title="Compare"  ng-class="{'btn-primary': CheckInCompareList(prod), 'btn-default': !CheckInCompareList(prod)}" ng-click="AddToCompare(prod)" ><span aria-hidden="true" class="glyphicon glyphicon-duplicate"></span>
+                                </button> 
+                                <button aria-label="Right Align" class="btn btn-default" ng-class="{'btn-warning': CheckInWishList(prod), 'btn-default': !CheckInWishList(prod)}" type="button" title="Add to Wish List" ng-click="AddRemoveToWishList(prod)"><span aria-hidden="true" class="glyphicon glyphicon-bookmark"></span>
+                                </button> 
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div id="footer" class="navbar navbar-default navbar-fixed-bottom" ng-show="show">
+        <div class="row" style="padding:10px 10px 0 10px">
+            <p class=compareTitleCaps style="font-size: 15px ; color:#0064c8"><b>ITEMS TO COMPARE</b> <div class="compareTitle">(Click on thumbnail to remove from list)</div></p>
+            <div style="height: 80%; width:140px;display: block; float: left; padding: 10px 10px 0 10px"  ng-repeat="product in ProductsToCompare">
+                <div>
+                     <a class="thumbnail" ng-click="RemoveFromCompare($index)">
+                        <img class="img-responsive" src="{{product.image}}" alt="" height="175">
+                    </a>
+                    <p style="font-size:10px">{{product.title}}</p>
+                </div>
+            </div> <!-- End of list of products in footer -->
+            <div class="wrap">
+                  <button class="btnCompare" style="float: right" ng-click="CompareNow()">COMPARE!</button>
+            </div>
+            <div class="wrap">
+                <button class="btnHide" style="float: right" ng-click="show=!show">Hide List</button>
+            </div>
+        </div>
+    </div> 
+    <div class="wrap" ng-show="!show">
+        <button class="btnShow" ng-click="show=!show" >Show List</button>
+    </div>

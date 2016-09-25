@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12" id="line-chart">
+      <div class="panel panel-default">
+          <div class="panel-heading" style="font-size: 15px; background-color: white"><b>Year to Year Rating</b></div>
+        <div class="panel-body">
+            <canvas id="line" class="chart chart-line" chart-data="graph.data" chart-labels="graph.labels" chart-options="options"></canvas>
+        </div>
+      </div>
+      <div class="panel panel-default">
+          <div class="panel-heading" style="background-color:#ffffff">><b>Average Rating By Country</b></div>
+        <div class="panel-body">
+            <div ng-repeat="(k,v) in graph.countryWise">
+              {{CountryByCode[k]}} : {{v}}
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
